@@ -38,6 +38,13 @@ patch_vbmeta_flag=auto;
 # boot install
 dump_boot; # use split_boot to skip ramdisk unpack, e.g. for devices with init_boot ramdisk
 
+android_ver=$(file_getprop /system/build.prop ro.build.version.release);
+patch_cmdline androidboot.version androidboot.version=$android_ver
+patch_cmdline overclock.cpu overclock.cpu=0
+patch_cmdline overclock.gpu overclock.gpu=0
+patch_cmdline led.vibration led.vibration=1
+patch_cmdline kernelsu.enabled kernelsu.enabled=0
+
 # write install
 write_boot; # use flash_boot to skip ramdisk repack, e.g. for devices with init_boot ramdisk
 ## end boot install
